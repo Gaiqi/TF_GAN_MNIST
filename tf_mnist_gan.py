@@ -101,8 +101,11 @@ def mnist_gan(mnist_dir, batch_size,epochs):
 	        samples.append(gen_op)
 	        
 	        #save checkpoints here
-	        
-	cv2.imwrite('Best_generated_sample.png',samples[-1].reshape(28,28)) #Plot image generated in final epoch
+		if epoch%100==0:
+                	saver.save(sess, 'model-{}.ckpt'.format(epoch))
+                	print ("Saving checkpoint at epoch = {}".format(epoch))
+        np.save('generated_images_array.npy',samples)       
+	#cv2.imwrite('Best_generated_sample.png',samples[-1].reshape(28,28)) #Plot image generated in final epoch
 
 
 if __name__ == '__main__':
