@@ -10,18 +10,13 @@ from tensorflow.examples.tutorials.mnist import input_data
 def generator(noise,reuse=None):
     with tf.variable_scope('gen',reuse=reuse): #allows to have subsets of parameters
         #Layer1 
-        hidden1 = tf.layers.dense(inputs=noise,units=256,activation = tf.nn.leaky_relu(alpha = 0.01))
-        
-        #Leaky relu
-        # alpha = 0.01
-        # hidden1 = tf.maximum(alpha*hidden1,hidden1)
-        
+        hidden1 = tf.layers.dense(inputs=noise,units=256)
+        hidden1 = tf.nn.leaky_relu(hidden1,alpha = 0.01) #relu
+   
         #Layer2
-        hidden2 = tf.layers.dense(inputs=hidden1,units=128,activation = tf.nn.leaky_relu(alpha = 0.01))
-        
-        #Leaky relu
-        # hidden2 = tf.maximum(alpha*hidden2,hidden2)
-        
+        hidden2 = tf.layers.dense(inputs=hidden1,units=128)
+        hidden2 = tf.nn.leaky_relu(hidden2,alpha = 0.01) #relu
+
         #Output
         output = tf.layers.dense(inputs=hidden2,units=784,activation=tf.nn.tanh)
         return output
@@ -29,18 +24,15 @@ def generator(noise,reuse=None):
 #Discriminator Network
 def discriminator(X,reuse=None):
     with tf.variable_scope('disc',reuse=reuse): #allows to have subsets of parameters
-        hidden1 = tf.layers.dense(inputs=X,units=256,activation = tf.nn.leaky_relu(alpha = 0.01))
         
-        # #relu
-        # alpha = 0.01
-        # hidden1 = tf.maximum(alpha*hidden1,hidden1)
-        
+        #Layer1
+        hidden1 = tf.layers.dense(inputs=X,units=256)
+        hidden1 = tf.nn.leaky_relu(hidden1,alpha = 0.01)  #relu   
+ 
         #Layer2
-        hidden2 = tf.layers.dense(inputs=hidden1,units=128,activation = tf.nn.leaky_relu(alpha = 0.01))
-        
-        #relu
-        # hidden2 = tf.maximum(alpha*hidden2,hidden2)
-        
+        hidden2 = tf.layers.dense(inputs=hidden1,units=128)
+        hidden2 = tf.nn.leaky_relu(hidden2,alpha = 0.01) #relu
+             
         #Output
         logits = tf.layers.dense(inputs=hidden2,units=1)
         output = tf.sigmoid(logits)
