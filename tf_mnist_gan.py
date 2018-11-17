@@ -73,9 +73,6 @@ def mnist_gan(mnist_dir, batch_size,epochs):
 	Disc_optim = tf.train.AdamOptimizer(lr).minimize(Total_disc_loss, var_list = disc_vars)
 	Gen_optim =  tf.train.AdamOptimizer(lr).minimize(Gen_loss, var_list = gen_vars)
 
-
-	batch_size = 100
-	epochs = 500
 	samples = []
 
 	init = tf.global_variables_initializer()
