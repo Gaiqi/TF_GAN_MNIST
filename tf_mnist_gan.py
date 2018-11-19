@@ -10,11 +10,11 @@ from tensorflow.examples.tutorials.mnist import input_data
 def generator(noise,reuse=None):
     with tf.variable_scope('gen',reuse=reuse): #allows to have subsets of parameters
         #Layer1 
-        hidden1 = tf.layers.dense(inputs=noise,units=256)
+        hidden1 = tf.layers.dense(inputs=noise,units=128)
         hidden1 = tf.nn.leaky_relu(hidden1,alpha = 0.01) #relu
    
         #Layer2
-        hidden2 = tf.layers.dense(inputs=hidden1,units=128)
+        hidden2 = tf.layers.dense(inputs=hidden1,units=256)
         hidden2 = tf.nn.leaky_relu(hidden2,alpha = 0.01) #relu
 
         #Output
