@@ -58,7 +58,7 @@ def mnist_gan(mnist_dir, batch_size,epochs):
 	Disc_gen_pred, Disc_gen_logits = discriminator(Gen,reuse=True) #Training generator on fake images form Generator
 
 	Disc_img_loss = loss_calc(Disc_img_logits,tf.ones_like(Disc_img_logits)*0.9)#Applies Smoothing for Labels
-	Disc_gen_loss = loss_calc(Disc_gen_logits,tf.ones_like(Disc_img_logits))
+	Disc_gen_loss = loss_calc(Disc_gen_logits,tf.zeros_like(Disc_img_logits))
 	Total_disc_loss = Disc_img_loss + Disc_gen_loss
 	Gen_loss = Disc_img_loss = loss_calc(Disc_gen_logits,tf.ones_like(Disc_gen_logits))
 
